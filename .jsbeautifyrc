@@ -1,0 +1,6 @@
+---
+  python:
+    indent_size: 4
+    sort_imports: true
+    ignore:
+      - "E501"
