@@ -4,7 +4,7 @@ import re
 import sys
 
 receipe = json.load(codecs.open(sys.argv[1], 'r', 'utf-8-sig'))
-regexp = '[\s+\.\/\!_,$%^*(+\"\']+|[+——！，。？?、~@#￥%……&*（）(){}~`-【】：:～><＞＜]+'
+regexp = '[\s+\.\/\!_,$%^*(+\"\'\[\]\-]+|[+——！，。？?、~@#￥%……&*（）(){}~`-【】﹝﹞￣︶￣ ／｜：:～><＞＜・ノ]+'
 
 for rc in receipe:
     rc['name'] = re.sub(regexp, ' ', rc['name'])

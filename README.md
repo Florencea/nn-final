@@ -13,6 +13,15 @@
     -   輸出`receipe_categoried_cleared.json`
     -   輸出`receipe_uncategoried_cleared.json`
 -   製作標記訓練資料
+    -   `python3 receipe_to_labeled_data.py receipe_categoried_cleared.json`
+    -   輸出
+        -   `data_name.train`
+        -   `data_intro.train`
+        -   `data_steps.train`
+        -   `data_name_intro.train`
+        -   `data_name_steps.train`
+        -   `data_intro_steps.train`
+        -   `data_name_intro_steps.train`
 
 ## 訓練模式
 

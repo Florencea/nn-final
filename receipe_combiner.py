@@ -14,9 +14,9 @@ rec_dict = {}
 for rd in rec_type:
     if rd['id_rec'] not in rec_dict:
         rec_dict[rd['id_rec']] = []
-        rec_dict[rd['id_rec']].append(rd['id_type'])
+        rec_dict[rd['id_rec']].append(cate_dict[rd['id_type']])
     else:
-        rec_dict[rd['id_rec']].append(rd['id_type'])
+        rec_dict[rd['id_rec']].append(cate_dict[rd['id_type']])
 
 steps_dict = {}
 for st in steps:
@@ -52,7 +52,7 @@ for rp in receipe:
             'name': rp['name'],
             'intro': rp['introduce'],
             'steps': steps_dict[rp['id']],
-            'category': cate_dict[rec_dict[rp['id']]]
+            'category': rec_dict[rp['id']]
         }
         receipe_output_categoried.append(rpp)
 
