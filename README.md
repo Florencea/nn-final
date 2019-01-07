@@ -43,7 +43,7 @@
 
 ## 有關開發筆記
 
--   使用python版本的fasttext(v0.8.3)
+-   使用python版本的[fasttext(v0.8.3)](https://pypi.org/project/fasttext/)
 
     -   `pip3 install Cython fasttext`
 
