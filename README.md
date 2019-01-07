@@ -4,9 +4,9 @@
 
 -   合併原始資料表、去除空資料(沒有`name` or 沒有`intro` or 沒有`steps`)、分離未分類食譜
     -   `python3 receipe_combiner.py`
-    -   資料欄位欄位空缺食譜： 5914 筆
-    -   已分類食譜： 37629 筆(`receipe_categoried.json`)
-    -   未分類食譜： 1348 筆(`receipe_uncategoried.json`)
+    -   資料欄位欄位空缺食譜： 32219 筆
+    -   已分類食譜： 11372 筆(`receipe_categoried.json`)
+    -   未分類食譜： 1300 筆(`receipe_uncategoried.json`)
 -   清理資料
 -   製作標記訓練資料
 
