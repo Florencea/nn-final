@@ -12,7 +12,11 @@ for ct in cate_type:
 
 rec_dict = {}
 for rd in rec_type:
-    rec_dict[rd['id_rec']] = rd['id_type']
+    if rd['id_rec'] not in rec_dict:
+        rec_dict[rd['id_rec']] = []
+        rec_dict[rd['id_rec']].append(rd['id_type'])
+    else:
+        rec_dict[rd['id_rec']].append(rd['id_type'])
 
 steps_dict = {}
 for st in steps:
@@ -39,7 +43,7 @@ for rp in receipe:
             'name': rp['name'],
             'intro': rp['introduce'],
             'steps': steps_dict[rp['id']],
-            'category': '未分類'
+            'category': []
         }
         receipe_output_uncategoried.append(rpp)
     else:
