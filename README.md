@@ -7,7 +7,11 @@
     -   資料欄位欄位空缺食譜： 32219 筆
     -   已分類食譜： 11372 筆(`receipe_categoried.json`)
     -   未分類食譜： 1300 筆(`receipe_uncategoried.json`)
--   清理資料
+-   清理資料中所有標點符號與非法字元
+    -   `python3 receipe_cleaner.py receipe_categoried.json`
+    -   `python3 receipe_cleaner.py receipe_uncategoried.json`
+    -   輸出`receipe_categoried_cleared.json`
+    -   輸出`receipe_uncategoried_cleared.json`
 -   製作標記訓練資料
 
 ## 訓練模式
