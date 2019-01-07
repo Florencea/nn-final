@@ -31,7 +31,7 @@ receipe_output_uncategoried = []
 receipe_empty = []
 
 for rp in receipe:
-    if rp['name'] == '' or rp['introduce'] == '' or rp['id'] not in steps_dict:
+    if rp['name'] == '' or rp['name'] is None or rp['introduce'] == '' or rp['introduce'] is None or rp['id'] not in steps_dict:
         receipe_empty.append(rp)
     elif rp['id'] not in rec_dict:
         rpp = {
