@@ -1,10 +1,10 @@
-import json
 import codecs
+import json
 
-cate_type = json.load(codecs.open('cate_type.json', 'r', 'utf-8-sig'))
-rec_type = json.load(codecs.open('rec_type.json', 'r', 'utf-8-sig'))
-steps = json.load(codecs.open('steps.json', 'r', 'utf-8-sig'))
-receipe = json.load(codecs.open('receipe.json', 'r', 'utf-8-sig'))
+cate_type = json.load(codecs.open('./original_data/cate_type.json', 'r', 'utf-8-sig'))
+rec_type = json.load(codecs.open('./original_data/rec_type.json', 'r', 'utf-8-sig'))
+steps = json.load(codecs.open('./original_data/steps.json', 'r', 'utf-8-sig'))
+receipe = json.load(codecs.open('./original_data/receipe.json', 'r', 'utf-8-sig'))
 
 cate_dict = {}
 for ct in cate_type:
