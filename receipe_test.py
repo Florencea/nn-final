@@ -2,7 +2,7 @@ import statistics
 
 import receipe_classifier as trainer
 
-test_times = 100
+test_times = 10
 
 training_list = [
     'data_name.train',
@@ -28,6 +28,7 @@ for training_source in training_list:
                     result_r = []
                     result_cnt = 0
                     result_nexample = 0
+                    print('doing ' + training_source + ' lr=' + str(lr_i) + ', epoch=' + str(ep_i) + ', word_ngrams=' + str(wng_i))
                     for test_i in range(test_times):
                         result = trainer.get_result_from(training_source, lr=lr_i, epoch=ep_i, word_ngrams=wng_i)
                         result_p.append(result.precision)
