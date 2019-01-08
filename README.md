@@ -83,7 +83,9 @@
 
     -   `python3 receipe_test.py`
     -   預設將各組合執行`10`次
+
         -   目前`word_ngrames`只要超過1就會發生`Floating point exception`，原因不明
+
     -   輸出各組合之精確度、召回率之平均值與標準差
 
 ## 訓練模式
