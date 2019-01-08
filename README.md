@@ -47,13 +47,13 @@
 
     -   `receipe_classifier.py`作為模組，會自主執行抽樣、訓練、驗證
 
-    ```python
-    import receipe_classifier as trainer
-    result = trainer.get_result_from('data_name.train')
-    print(result.precision)
-    print(result.recall)
-    print(result.nexamples)
-    ```
+        ```python
+        import receipe_classifier as trainer
+        result = trainer.get_result_from('data_name.train')
+        print(result.precision)
+        print(result.recall)
+        print(result.nexamples)
+        ```
 
     -   可使用參數說明：
 
@@ -70,13 +70,13 @@
         -   `result.recall`，於`k=k`時的召回率
         -   `result.nexamples`，驗證的資料筆數
 
-    ```python
-    import receipe_classifier as trainer
-    result = trainer.get_result_from('data_name.train', lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate=0.9)
-    print(result.precision)
-    print(result.recall)
-    print(result.nexamples)
-    ```
+        ```python
+        import receipe_classifier as trainer
+        result = trainer.get_result_from('data_name.train', lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate=0.9)
+        print(result.precision)
+        print(result.recall)
+        print(result.nexamples)
+        ```
 
 ## 訓練模式
 
