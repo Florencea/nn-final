@@ -35,14 +35,15 @@ receipe_output_uncategoried = []
 receipe_empty = []
 
 for rp in receipe:
+    tmp = steps_dict[rp['id']] if rp['id'] in steps_dict else None
     if rp['name'] == '' or rp['name'] is None or rp['introduce'] == '' or rp['introduce'] is None or rp['id'] not in steps_dict:
         receipe_empty.append(rp)
-    elif rp['id'] not in rec_dict:
+    if rp['id'] not in rec_dict:
         rpp = {
             'id': rp['id'],
             'name': rp['name'],
             'intro': rp['introduce'],
-            'steps': steps_dict[rp['id']],
+            'steps': tmp,
             'category': []
         }
         receipe_output_uncategoried.append(rpp)
@@ -51,7 +52,7 @@ for rp in receipe:
             'id': rp['id'],
             'name': rp['name'],
             'intro': rp['introduce'],
-            'steps': steps_dict[rp['id']],
+            'steps': tmp,
             'category': rec_dict[rp['id']]
         }
         receipe_output_categoried.append(rpp)
@@ -60,8 +61,8 @@ print('未分類食譜： ' + str(len(receipe_output_uncategoried)) + ' 筆')
 print('已分類食譜： ' + str(len(receipe_output_categoried)) + ' 筆')
 print('資料欄位欄位空缺食譜： ' + str(len(receipe_empty)) + ' 筆')
 
-with open('receipe_categoried.json', 'w') as json_file:
+with open('receipe_categoried.json', 'w', encoding = 'utf-8-sig') as json_file:
     json.dump(receipe_output_categoried, json_file)
 
-with open('receipe_uncategoried.json', 'w') as json_file:
+with open('receipe_uncategoried.json', 'w', encoding = 'utf-8-sig') as json_file:
     json.dump(receipe_output_uncategoried, json_file)
