@@ -2,21 +2,17 @@
 
 ## 流程
 
--   合併原始資料表、去除空資料(沒有`name` or 沒有`intro` or 沒有`steps`)、分離未分類食譜
+-   合併原始資料表、分離未分類食譜，空資料(沒有`name` or 沒有`intro` or 沒有`steps`)於製作訓練資料時再去除
     -   `python3 receipe_combiner.py`
     -   資料欄位欄位空缺食譜： 32219 筆
-    -   已分類食譜： 11372 筆(`receipe_categoried.json`)
-    -   未分類食譜： 1300 筆(`receipe_uncategoried.json`)
--   合併原始資料表、分離未分類食譜
-    - 已分類食譜： 43285 筆(`receipe_categoried.json`)
-    - 未分類食譜： 1606 筆(`receipe_uncategoried.json`)
+    -   已分類食譜： 43285 筆(`receipe_categoried.json`)
+    -   未分類食譜： 1606 筆(`receipe_uncategoried.json`)
 -   清理資料中所有標點符號與非法字元
     -   `python3 receipe_cleaner.py receipe_categoried.json`
     -   `python3 receipe_cleaner.py receipe_uncategoried.json`
     -   輸出`receipe_categoried_cleared.json`
     -   輸出`receipe_uncategoried_cleared.json`
--   製作標記訓練資料
-    - 若使用到的屬性為空資料則不採用
+-   製作標記訓練資料(若使用到的屬性為空資料則不採用)
     -   `python3 receipe_to_labeled_data.py receipe_categoried_cleared.json`
     -   輸出
         -   `data_name.train`
