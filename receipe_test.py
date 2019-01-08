@@ -14,7 +14,7 @@ training_list = [
     'data_name_intro_steps.train'
 ]
 
-lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
 epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
 wng_list = [1]
 
