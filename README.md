@@ -1,27 +1,82 @@
 # nn-final
 
+## 開發筆記
+
+-   使用python版本的[fasttext(v0.8.3)](https://pypi.org/project/fasttext/)
+
+    -   `pip3 install Cython fasttext`
+
+-   專案目錄結構
+
+    -   原始碼皆放置於頂層目錄
+    -   `models`放置已訓練之模型
+    -   `original_data`放置自資料庫輸出之原始資料表(未合併)
+    -   `temp`作為一般工作目錄
+    -   `training_data`放置訓練資料
+
 ## 流程
 
 -   合併原始資料表、分離未分類食譜，空資料(沒有`name` or 沒有`intro` or 沒有`steps`)於製作訓練資料時再去除
+
     -   `python3 receipe_combiner.py`
     -   資料欄位欄位空缺食譜： 32219 筆
-    -   已分類食譜： 43285 筆(`receipe_categoried.json`)
-    -   未分類食譜： 1606 筆(`receipe_uncategoried.json`)
+    -   已分類食譜： 43285 筆(`temp/receipe_categoried.json`)
+    -   未分類食譜： 1606 筆(`temp/receipe_uncategoried.json`)
+
 -   清理資料中所有標點符號與非法字元
-    -   `python3 receipe_cleaner.py receipe_categoried.json`
-    -   `python3 receipe_cleaner.py receipe_uncategoried.json`
-    -   輸出`receipe_categoried_cleared.json`
-    -   輸出`receipe_uncategoried_cleared.json`
+
+    -   `python3 receipe_cleaner.py temp/receipe_categoried.json`
+    -   `python3 receipe_cleaner.py temp/receipe_uncategoried.json`
+    -   輸出`temp/receipe_categoried_cleared.json`
+    -   輸出`temp/receipe_uncategoried_cleared.json`
+
 -   製作標記訓練資料(若使用到的屬性為空資料則不採用)
-    -   `python3 receipe_to_labeled_data.py receipe_categoried_cleared.json`
+
+    -   `python3 receipe_to_labeled_data.py temp/receipe_categoried_cleared.json`
     -   輸出
-        -   `data_name.train`
-        -   `data_intro.train`
-        -   `data_steps.train`
-        -   `data_name_intro.train`
-        -   `data_name_steps.train`
-        -   `data_intro_steps.train`
-        -   `data_name_intro_steps.train`
+
+        -   `training_data/data_name.train`
+        -   `training_data/data_intro.train`
+        -   `training_data/data_steps.train`
+        -   `training_data/data_name_intro.train`
+        -   `training_data/data_name_steps.train`
+        -   `training_data/data_intro_steps.train`
+        -   `training_data/data_name_intro_steps.train`
+
+-   訓練模型並驗證結果
+
+    -   `receipe_classifier.py`作為模組，會自主執行抽樣、訓練、驗證
+
+    ```python
+    import receipe_classifier as trainer
+    result = trainer.get_result_from('data_name.train')
+    print(result.precision)
+    print(result.recall)
+    print(result.nexamples)
+    ```
+
+    -   可使用參數說明：
+
+        -   `input_file`(必須)，訓練資料路徑，會自動加上`training_data/`前綴
+        -   `lr`，learning rate，預設值`lr=1`
+        -   `epoach`，epoach，預設值`epoch=5`
+        -   `word_ngrams`，word N grams，預設值`word_ngrams=1`
+        -   `k`，驗證用的k值，預設值`k=1`
+        -   `sample_rate`，訓練資料中有多少比例拿來做模型，預設值`sample_rate=0.9`
+
+    -   回傳結果說明：
+
+        -   `result.precision`，於`k=k`時的精確度
+        -   `result.recall`，於`k=k`時的召回率
+        -   `result.nexamples`，驗證的資料筆數
+
+    ```python
+    import receipe_classifier as trainer
+    result = trainer.get_result_from('data_name.train', lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate=0.9)
+    print(result.precision)
+    print(result.recall)
+    print(result.nexamples)
+    ```
 
 ## 訓練模式
 
@@ -40,12 +95,6 @@
 ### 三屬性
 
 -   `name` + `intro` + `steps`
-
-## 有關開發筆記
-
--   使用python版本的[fasttext(v0.8.3)](https://pypi.org/project/fasttext/)
-
-    -   `pip3 install Cython fasttext`
 
 ## 有關報告
 
