@@ -4,7 +4,7 @@ import re
 import sys
 
 receipe = json.load(codecs.open(sys.argv[1], 'r', 'utf-8-sig'))
-regexp = '[\s+\.\/\!_,$%^*(+\"\'\[\]\-]+|[+——！，。？?、~@#￥%……&*（）(){}~`-【】﹝﹞￣︶￣ ／｜：:～><＞＜・ノ]+'
+regexp = r'[\s+\.\/\!_,$%^*(+\"\'\[\]\-]+|[+——！，。？?、~@#￥%……&*（）(){}~`-【】﹝﹞￣︶￣ ／｜：:～><＞＜・ノ]+'
 
 for rc in receipe:
     if rc['name'] != '' and rc['name'] is not None:
@@ -18,5 +18,5 @@ for rc in receipe:
             st['content'] = re.sub(regexp, ' ', st['content'])
             st['content'] = re.sub(' +', ' ', st['content'])
 
-with open(sys.argv[1].split('.')[0] + '_cleared.json', 'w', encoding = 'utf-8-sig') as json_file:
+with open(sys.argv[1].split('.')[0] + '_cleared.json', 'w', encoding='utf-8-sig') as json_file:
     json.dump(receipe, json_file)
