@@ -1,1 +1,3 @@
 .DS_Store
+.flake8
+.jsbeautifyrc
