@@ -30,4 +30,5 @@ def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate
     classifier = fasttext.supervised(training_source, model_name, lr=lr, epoch=epoch, word_ngrams=word_ngrams)
     verified_source = 'temp/' + input_file.split('.')[0] + '.verified'
     result = classifier.test(verified_source, k=k)
+    result.ntrain = training_data_counts
     return result
