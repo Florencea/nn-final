@@ -54,6 +54,7 @@
         print(result.precision)
         print(result.recall)
         print(result.nexamples)
+        print(result.ntrain)
         ```
 
     -   可使用參數說明：
@@ -70,6 +71,7 @@
         -   `result.precision`，於`k=k`時的精確度
         -   `result.recall`，於`k=k`時的召回率
         -   `result.nexamples`，驗證的資料筆數
+        -   `result.ntrain`，用於訓練的資料筆數
 
         ```python
         import receipe_classifier as trainer
@@ -77,6 +79,7 @@
         print(result.precision)
         print(result.recall)
         print(result.nexamples)
+        print(result.ntrain)
         ```
 
 -   自動執行訓練並於`result`目錄產生`.csv`結果
