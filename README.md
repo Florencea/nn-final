@@ -9,7 +9,7 @@
 -   專案目錄結構
 
     -   原始碼皆放置於頂層目錄
-    -   `models`放置已訓練之模型
+    -   `models`放置已訓練之模型(執行程式前須先自行創建)
     -   `original_data`放置自資料庫輸出之原始資料表(未合併)
     -   `result`放置實驗結果
     -   `temp`作為一般工作目錄
@@ -59,7 +59,7 @@
     -   可使用參數說明：
 
         -   `input_file`(必須)，訓練資料路徑，會自動加上`training_data/`前綴
-        -   `lr`，learning rate(0則模型不再變更)(0.1~1.0)，預設值`lr=1`
+        -   `lr`，learning rate(0則模型不再變更)(0.1~1.0)，預設值`lr=0.1`
         -   `epoch`，epoch(會掃過每筆資料幾次)(5~50)，預設值`epoch=5`
         -   `word_ngrams`，word N grams(詞組)(1~5)，預設值`word_ngrams=1`
         -   `k`，驗證用的k值，預設值`k=1`
@@ -82,9 +82,11 @@
 -   自動執行訓練並於`result`目錄產生`.csv`結果
 
     -   `python3 receipe_test.py`
-    -   預設將各組合執行`10`次
+    -   預設將各組合執行`10`次(暫定，`100`次有點久)
 
-        -   目前`word_ngrames`只要超過1就會發生`Floating point exception`，原因不明
+        -   `lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]`，超過`0.6`會發生`Segmentation fault`，原因不明
+        -   `epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]`
+        -   `word_ngrames = [1]`，超過1就會發生`Floating point exception`，原因不明
 
     -   輸出各組合之精確度、召回率之平均值與標準差
 
@@ -92,19 +94,19 @@
 
 ### 單屬性
 
--   `name`
--   `intro`
--   `steps`
+-   `name` [執行結果](result/result_name.csv)
+-   `intro` [執行結果](result/result_intro.csv)
+-   `steps` [執行結果](result/result_steps.csv)
 
 ### 兩屬性
 
--   `name` + `intro`
--   `name` + `steps`
--   `intro` + `steps`
+-   `name` + `intro` [執行結果](result/result_name_intro.csv)
+-   `name` + `steps` [執行結果](result/result_name_steps.csv)
+-   `intro` + `steps` [執行結果](result/result_intro_steps.csv)
 
 ### 三屬性
 
--   `name` + `intro` + `steps`
+-   `name` + `intro` + `steps` [執行結果](result/result_name_intro_steps.csv)
 
 ## 有關報告
 
