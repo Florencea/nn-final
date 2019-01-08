@@ -11,6 +11,7 @@
     -   原始碼皆放置於頂層目錄
     -   `models`放置已訓練之模型
     -   `original_data`放置自資料庫輸出之原始資料表(未合併)
+    -   `result`放置實驗結果
     -   `temp`作為一般工作目錄
     -   `training_data`放置訓練資料
 
@@ -77,6 +78,12 @@
         print(result.recall)
         print(result.nexamples)
         ```
+
+-   自動執行訓練並於`result`目錄產生`.csv`結果
+
+    -   `python3 receipe_test.py`
+    -   預設將各組合執行`100`次
+    -   輸出各組合之精確度、召回率之平均值與標準差
 
 ## 訓練模式
 
