@@ -59,7 +59,7 @@
 
         -   `input_file`(必須)，訓練資料路徑，會自動加上`training_data/`前綴
         -   `lr`，learning rate(0則模型不再變更)(0.1~1.0)，預設值`lr=1`
-        -   `epoach`，epoach(會掃過每筆資料幾次)(5~50)，預設值`epoch=5`
+        -   `epoch`，epoch(會掃過每筆資料幾次)(5~50)，預設值`epoch=5`
         -   `word_ngrams`，word N grams(詞組)(1~5)，預設值`word_ngrams=1`
         -   `k`，驗證用的k值，預設值`k=1`
         -   `sample_rate`，訓練資料中有多少比例拿來做模型，預設值`sample_rate=0.9`
