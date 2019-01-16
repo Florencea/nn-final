@@ -89,7 +89,7 @@
 
         -   `lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]`，超過`0.6`會發生`Segmentation fault`，原因不明
         -   `epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]`
-        -   `word_ngrames = [1]`，超過1就會發生`Floating point exception`，原因不明
+        -   `word_ngrames = [1]`，超過1就會發生`Floating point exception`，推測是因為英文詞組使用空格分隔，中文語句過長導致的
 
     -   輸出各組合之精確度、召回率之平均值與標準差
 
