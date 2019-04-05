@@ -38,7 +38,7 @@ for rp in receipe:
     tmp = steps_dict[rp['id']] if rp['id'] in steps_dict else None
     if rp['name'] == '' or rp['name'] is None or rp['introduce'] == '' or rp['introduce'] is None or rp['id'] not in steps_dict:
         receipe_empty.append(rp)
-    if rp['id'] not in rec_dict:
+    if rp['id'] not in rec_dict or rec_dict[rp['id']][0] == 'null':
         rpp = {
             'id': rp['id'],
             'name': rp['name'],
