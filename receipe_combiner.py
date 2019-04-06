@@ -4,6 +4,8 @@ import json
 cate_type = json.load(codecs.open('./original_data/cate_type.json', 'r', 'utf-8-sig'))
 rec_type = json.load(codecs.open('./original_data/rec_type.json', 'r', 'utf-8-sig'))
 steps = json.load(codecs.open('./original_data/steps.json', 'r', 'utf-8-sig'))
+rec_ingre = json.load(codecs.open('./original_data/rec_ingre.json', 'r', 'utf-8-sig'))
+ingredient = json.load(codecs.open('./original_data/ingredient.json', 'r', 'utf-8-sig'))
 receipe = json.load(codecs.open('./original_data/receipe.json', 'r', 'utf-8-sig'))
 
 cate_dict = {}
@@ -30,12 +32,25 @@ for st in steps:
     else:
         steps_dict[st['id_receipe']].append(stt)
 
+ingre_dict = {}
+for ingre in ingredient:
+    ingre_dict[ingre['id']] = ingre['name']
+
+rec_ingre_dict = {}
+for ri in rec_ingre:
+    if ri['id_rec'] not in rec_ingre_dict:
+        rec_ingre_dict[ri['id_rec']] = []
+        rec_ingre_dict[ri['id_rec']].append(ingre_dict[ri['id_ingre']])
+    else:
+        rec_ingre_dict[ri['id_rec']].append(ingre_dict[ri['id_ingre']])
+
 receipe_output_categoried = []
 receipe_output_uncategoried = []
 receipe_empty = []
 
 for rp in receipe:
-    tmp = steps_dict[rp['id']] if rp['id'] in steps_dict else None
+    tmp_steps = steps_dict[rp['id']] if rp['id'] in steps_dict else None
+    tmp_ingres = rec_ingre_dict[rp['id']] if rp['id'] in rec_ingre_dict else None
     if rp['name'] == '' or rp['name'] is None or rp['introduce'] == '' or rp['introduce'] is None or rp['id'] not in steps_dict:
         receipe_empty.append(rp)
     if rp['id'] not in rec_dict or rec_dict[rp['id']][0] == 'null':
@@ -43,7 +58,8 @@ for rp in receipe:
             'id': rp['id'],
             'name': rp['name'],
             'intro': rp['introduce'],
-            'steps': tmp,
+            'steps': tmp_steps,
+            'ingres': tmp_ingres,
             'category': []
         }
         receipe_output_uncategoried.append(rpp)
@@ -52,7 +68,8 @@ for rp in receipe:
             'id': rp['id'],
             'name': rp['name'],
             'intro': rp['introduce'],
-            'steps': tmp,
+            'steps': tmp_steps,
+            'ingres': tmp_ingres,
             'category': rec_dict[rp['id']]
         }
         receipe_output_categoried.append(rpp)
