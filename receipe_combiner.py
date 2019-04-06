@@ -6,7 +6,7 @@ rec_type = json.load(codecs.open('./original_data/rec_type.json', 'r', 'utf-8-si
 steps = json.load(codecs.open('./original_data/steps.json', 'r', 'utf-8-sig'))
 rec_ingre = json.load(codecs.open('./original_data/rec_ingre.json', 'r', 'utf-8-sig'))
 ingredient = json.load(codecs.open('./original_data/ingredient.json', 'r', 'utf-8-sig'))
-spices = json.load(codecs.open('./original_data/spice.json', 'r', 'utf-8-sig'))
+spices = json.load(codecs.open('./original_data/rec_ingre_spi.json', 'r', 'utf-8-sig'))
 receipe = json.load(codecs.open('./original_data/receipe.json', 'r', 'utf-8-sig'))
 
 cate_dict = {}
@@ -47,11 +47,11 @@ for ri in rec_ingre:
 
 spices_dict = {}
 for sp in spices:
-    if sp['id_rec'] not in spices_dict:
-        spices_dict[sp['id_rec']] = []
-        spices_dict[sp['id_rec']].append(sp['ingre'])
+    if sp['rec_id'] not in spices_dict:
+        spices_dict[sp['rec_id']] = []
+        spices_dict[sp['rec_id']].append(sp['ingre'])
     else:
-        spices_dict[sp['id_rec']].append(sp['ingre'])
+        spices_dict[sp['rec_id']].append(sp['ingre'])
 
 receipe_output_categoried = []
 receipe_output_uncategoried = []

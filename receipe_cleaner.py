@@ -10,7 +10,6 @@ for rc in receipe:
     if rc['name'] != '' and rc['name'] is not None:
         rc['name'] = re.sub(regexp, ' ', rc['name'])
         rc['name'] = re.sub(' +', ' ', rc['name'])
-        rc['name'] = rc['name'].replace('私房食譜','')
     if rc['intro'] != '' and rc['intro'] is not None:
         rc['intro'] = re.sub(regexp, ' ', rc['intro'])
         rc['intro'] = re.sub(' +', ' ', rc['intro'])
