@@ -40,7 +40,7 @@ for iters in range(1, len(train_list)+1):
                         for i in rc[cb]:
                             tmp_str += ' ' + i['content']
                     elif cb == 'name' or cb == 'intro':
-                        tmp_str += rc[cb]
+                        tmp_str += ' ' + rc[cb]
                     else:
                         for i in rc[cb]:
                             tmp_str += ' ' + i

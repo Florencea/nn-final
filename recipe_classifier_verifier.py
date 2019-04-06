@@ -19,12 +19,12 @@ def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate
         data_verified.append(training_data_all[dv])
     with open('temp/' + input_file.split('.')[0] + '.sample', 'w', encoding='utf-8-sig') as sampled_file:
         for line in data_sampled:
-            print(line.rstrip(), file=sampled_file)
+            print(line, file=sampled_file)
     training_source = 'temp/' + input_file.split('.')[0] + '.sample'
     model_name = 'models/' + input_file.split('.')[0].replace('data', 'model')
-    # with open('temp/' + input_file.split('.')[0] + '.verified', 'w', encoding='utf-8-sig') as verified_file:
-    #     for line in data_verified:
-    #         print(line.rstrip(), file=verified_file)
+    with open('temp/' + input_file.split('.')[0] + '.verified', 'w', encoding='utf-8-sig') as verified_file:
+        for line in data_verified:
+            print(line, file=verified_file)
     #classifier = fasttext.train_supervised(training_source, model_name, lr=lr, epoch=epoch, word_ngrams=word_ngrams)
     classifier = fasttext.supervised(training_source, model_name, lr=lr, epoch=epoch, word_ngrams=word_ngrams)
     verified_source = 'temp/' + input_file.split('.')[0] + '.verified'
