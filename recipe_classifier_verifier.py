@@ -46,7 +46,7 @@ def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate
     for idx in range(0, len(result_list)):
         if lable_list[idx] != result_list[idx]:
             wrong += 1 
-            tmp_str = '' + lable_list[idx] + ' => ' + result_list[idx] + ' ::> ' + verified_list[idx]
+            tmp_str = '' + lable_list[idx] + ' => ' + result_list[idx] + ' => ' + verified_list[idx]
             handled_result_list.append(tmp_str)
 
     print('驗證資料數 :', len(results))

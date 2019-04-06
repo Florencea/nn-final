@@ -12,14 +12,23 @@ receipe = json.load(codecs.open('./original_data/receipe.json', 'r', 'utf-8-sig'
 cate_dict = {}
 for ct in cate_type:
     cate_dict[ct['id']] = ct['name']
+    
+def merge_type(type_id):
+    if type_id==0 or type_id==1 or type_id==12:
+        type_id = 0
+    elif type_id==3:
+        type_id = 3
+    else:
+        type_id = 2
+    return type_id
 
 rec_dict = {}
 for rd in rec_type:
     if rd['id_rec'] not in rec_dict:
         rec_dict[rd['id_rec']] = []
-        rec_dict[rd['id_rec']].append(cate_dict[rd['id_type']])
+        rec_dict[rd['id_rec']].append(cate_dict[merge_type(rd['id_type'])])
     else:
-        rec_dict[rd['id_rec']].append(cate_dict[rd['id_type']])
+        rec_dict[rd['id_rec']].append(cate_dict[merge_type(rd['id_type'])])
 
 steps_dict = {}
 for st in steps:
