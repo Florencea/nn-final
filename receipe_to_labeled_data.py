@@ -38,9 +38,11 @@ for iters in range(1, len(train_list)+1):
                     tmp_str = ''
                     if cb == 'steps':
                         for i in rc[cb]:
-                            tmp_str += i['content'] + ' '
+                            tmp_str += ' ' + i['content']
+                    elif cb == 'name' or cb == 'intro':
+                        tmp_str += rc[cb]
                     else:
                         for i in rc[cb]:
-                            tmp_str += i + ' '
+                            tmp_str += ' ' + i
                     print(tmp_str, end='', file=text_file)
                 print('', file=text_file)
