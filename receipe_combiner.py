@@ -6,6 +6,7 @@ rec_type = json.load(codecs.open('./original_data/rec_type.json', 'r', 'utf-8-si
 steps = json.load(codecs.open('./original_data/steps.json', 'r', 'utf-8-sig'))
 rec_ingre = json.load(codecs.open('./original_data/rec_ingre.json', 'r', 'utf-8-sig'))
 ingredient = json.load(codecs.open('./original_data/ingredient.json', 'r', 'utf-8-sig'))
+spices = json.load(codecs.open('./original_data/spice.json', 'r', 'utf-8-sig'))
 receipe = json.load(codecs.open('./original_data/receipe.json', 'r', 'utf-8-sig'))
 
 cate_dict = {}
@@ -44,6 +45,14 @@ for ri in rec_ingre:
     else:
         rec_ingre_dict[ri['id_rec']].append(ingre_dict[ri['id_ingre']])
 
+spices_dict = {}
+for sp in spices:
+    if sp['id_rec'] not in spices_dict:
+        spices_dict[sp['id_rec']] = []
+        spices_dict[sp['id_rec']].append(sp['ingre'])
+    else:
+        spices_dict[sp['id_rec']].append(sp['ingre'])
+
 receipe_output_categoried = []
 receipe_output_uncategoried = []
 receipe_empty = []
@@ -51,6 +60,7 @@ receipe_empty = []
 for rp in receipe:
     tmp_steps = steps_dict[rp['id']] if rp['id'] in steps_dict else None
     tmp_ingres = rec_ingre_dict[rp['id']] if rp['id'] in rec_ingre_dict else None
+    tmp_spices = spices_dict[rp['id']] if rp['id'] in spices_dict else None
     if rp['name'] == '' or rp['name'] is None or rp['introduce'] == '' or rp['introduce'] is None or rp['id'] not in steps_dict:
         receipe_empty.append(rp)
     if rp['id'] not in rec_dict or rec_dict[rp['id']][0] == 'null':
@@ -60,6 +70,7 @@ for rp in receipe:
             'intro': rp['introduce'],
             'steps': tmp_steps,
             'ingres': tmp_ingres,
+            'spices': tmp_spices,
             'category': []
         }
         receipe_output_uncategoried.append(rpp)
@@ -70,6 +81,7 @@ for rp in receipe:
             'intro': rp['introduce'],
             'steps': tmp_steps,
             'ingres': tmp_ingres,
+            'spices': tmp_spices,
             'category': rec_dict[rp['id']]
         }
         receipe_output_categoried.append(rpp)
