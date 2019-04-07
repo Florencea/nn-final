@@ -1,8 +1,6 @@
 import math
 import random
-
 import fasttext
-
 
 def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate=0.9):
     training_data_all = []

@@ -4,7 +4,7 @@ import sys
 from itertools import combinations
 
 receipe = json.load(codecs.open(sys.argv[1], 'r', 'utf-8-sig'))
-train_list = ['name', 'ingres', 'spices', 'steps']
+train_list = ['name', 'intro', 'ingres', 'steps']
 #train_list = ['name', 'intro', 'ingres', 'spices', 'steps']
 
 def is_None(recipe, combination):
