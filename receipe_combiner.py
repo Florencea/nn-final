@@ -19,6 +19,8 @@ def merge_type(type_id):
         type_id = 0
     elif type_id==3:
         type_id = 3
+    elif type_id==16:
+        type_id = 16
     else:
         type_id = 2
     return str(type_id)

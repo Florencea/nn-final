@@ -2,7 +2,7 @@ import statistics
 import recipe_classifier_verifier as trainer
 from itertools import combinations
 
-test_times = 10
+test_times = 5
 verify_mode = False
 
 #train_list = ['name', 'intro', 'ingres', 'steps']
@@ -16,9 +16,12 @@ for iters in range(1, len(train_list)+1):
         train_file += '.train'
         training_list.append(train_file)
 
-lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
-epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+lr_list = [0.2,0.4, 0.6]
+epoch_list = [5, 20, 35, 50]
 wng_list = [1]
+# lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+# epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+# wng_list = [1]
 
 if verify_mode:
     for training_source in training_list:
