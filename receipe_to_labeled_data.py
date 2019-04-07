@@ -1,94 +1,48 @@
 import codecs
 import json
 import sys
+from itertools import combinations
 
 receipe = json.load(codecs.open(sys.argv[1], 'r', 'utf-8-sig'))
+train_list = ['name', 'intro', 'ingres', 'steps']
+#train_list = ['name', 'intro', 'ingres', 'spices', 'steps']
 
-with open('training_data/data_name.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['name'] == '' or rc['name'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        print(label_str + rc['name'], file=text_file)
+def is_None(recipe, combination):
+    for cb in combination:
+        if recipe[cb] == '' or recipe[cb] is None:
+            return True
+    return False
 
-with open('training_data/data_intro.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['intro'] == '' or rc['intro'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        print(label_str + rc['intro'], file=text_file)
+def get_label_str(category):
+    label_str = ''
+    for ct in category:
+        label_str += '__label__'
+        label_str += ct
+    return label_str
 
-with open('training_data/data_steps.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['steps'] == '' or rc['steps'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        step_str = ''
-        for st in rc['steps']:
-            step_str += st['content']
-        print(label_str + step_str, file=text_file)
-
-with open('training_data/data_name_intro.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['name'] == '' or rc['name'] is None or rc['intro'] == '' or rc['intro'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        print(label_str + rc['name'] + ' ' + rc['intro'], file=text_file)
-
-with open('training_data/data_name_steps.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['name'] == '' or rc['name'] is None or rc['steps'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        step_str = ''
-        for st in rc['steps']:
-            step_str += st['content']
-        print(label_str + rc['name'] + ' ' + step_str, file=text_file)
-
-with open('training_data/data_intro_steps.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['intro'] == '' or rc['intro'] is None or rc['steps'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        step_str = ''
-        for st in rc['steps']:
-            step_str += st['content']
-        print(label_str + rc['intro'] + ' ' + step_str, file=text_file)
-
-with open('training_data/data_name_intro_steps.train', 'w', encoding='utf-8-sig') as text_file:
-    for rc in receipe:
-        if rc['name'] == '' or rc['name'] is None or rc['intro'] == '' or rc['intro'] is None or rc['steps'] is None:
-            continue
-        label_str = ''
-        for ct in rc['category']:
-            label_str += '__label__'
-            label_str += ct
-            label_str += ' '
-        step_str = ''
-        for st in rc['steps']:
-            step_str += st['content']
-        print(label_str + rc['name'] + ' ' + rc['intro'] + ' ' + step_str, file=text_file)
+for iters in range(1, len(train_list)+1):
+    for combination in combinations(train_list, iters):
+        train_file = 'training_data/data'
+        for cb in combination:
+            train_file += '_' + cb
+        train_file += '.train'
+        with open(train_file, 'w', encoding='utf-8-sig') as text_file:
+            print(train_file)
+            for rc in receipe:
+                if is_None(rc, combination):
+                    continue
+                label_str = get_label_str(rc['category'])
+                print(label_str, end='', file=text_file)
+                train_str_list = []
+                for cb in combination:
+                    tmp_str = ''
+                    if cb == 'steps':
+                        for i in rc[cb]:
+                            tmp_str += ' ' + i['content']
+                    elif cb == 'name' or cb == 'intro':
+                        tmp_str += ' ' + rc[cb]
+                    else:
+                        for i in rc[cb]:
+                            tmp_str += ' ' + i
+                    print(tmp_str, end='', file=text_file)
+                print('', file=text_file)

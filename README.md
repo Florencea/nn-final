@@ -66,6 +66,7 @@
         -   `word_ngrams`，word N grams(詞組)(1~5)，預設值`word_ngrams=1`
         -   `k`，驗證用的k值，預設值`k=1`
         -   `sample_rate`，訓練資料中有多少比例拿來做模型，預設值`sample_rate=0.9`
+        -   `verify`，如果要檢查每一筆錯誤資料則為`True`，預設`verify=False`
 
     -   回傳結果說明：
 
@@ -82,35 +83,46 @@
         print(result.nexamples)
         print(result.ntrain)
         ```
+        -   若於驗證模式下(`verify=True`)，輸出則為
+        ```python
+        wrong = 0
+        handled_result_list = []
+        for idx in range(0, len(result_list)):
+            if lable_list[idx] != result_list[idx]:
+                wrong += 1 
+                tmp_str = '' + lable_list[idx] + ' => ' + result_list[idx] + ' => ' + verified_list[idx]
+                handled_result_list.append(tmp_str)
+
+        print('驗證資料數 :', len(results))
+        print('錯誤分類數 :', wrong)
+        print('正確率 :', 100-(wrong/len(results)*100), '%')
+        return handled_result_list
+        ```
+
 
 -   自動執行訓練並於`result`目錄產生`.csv`結果
 
-    -   `python3 receipe_test.py`
+    -   `python3 recipe_verify.py`
     -   預設將各組合執行`10`次(暫定，`100`次有點久)
 
         -   `lr_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]`，超過`0.6`會發生`Segmentation fault`，原因不明
         -   `epoch_list = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]`
         -   `word_ngrames = [1]`，超過1就會發生`Floating point exception`，推測是因為英文詞組使用空格分隔，中文語句過長導致的
 
+    -   可使用參數說明：
+        -   `verify_mode`，如果要檢查每一筆錯誤資料則為`True`，預設`verify=False`
+        -   `train_list`，要加入測試的資料屬性
+        -   `combination_length`，幾種以上的屬性併成測試資料
+
     -   輸出各組合之精確度、召回率之平均值與標準差
 
-## 訓練模式
+## 訓練結果
+-   [執行結果](result/result.csv)
 
-### 單屬性
+    -   同資料夾內的其他檔案為舊的訓練結果
 
--   `name` [執行結果](result/result_name.csv)
--   `intro` [執行結果](result/result_intro.csv)
--   `steps` [執行結果](result/result_steps.csv)
+-   驗證資料 - `verified_result/...`
 
-### 兩屬性
-
--   `name` + `intro` [執行結果](result/result_name_intro.csv)
--   `name` + `steps` [執行結果](result/result_name_steps.csv)
--   `intro` + `steps` [執行結果](result/result_intro_steps.csv)
-
-### 三屬性
-
--   `name` + `intro` + `steps` [執行結果](result/result_name_intro_steps.csv)
 
 ## 有關報告
 
