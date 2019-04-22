@@ -1,6 +1,8 @@
 import math
 import random
+
 import fasttext
+
 
 def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate=0.9, verify=True):
     training_data_all = []
@@ -28,26 +30,26 @@ def get_result_from(input_file, lr=0.1, epoch=5, word_ngrams=1, k=1, sample_rate
         verified_list = []
         lable_list = []
         for d in data_verified:
-            lable_list.append(d[d.find('l__')+3: d.find(' ')])
+            lable_list.append(d[d.find('l__') + 3: d.find(' ')])
             verified_list.append(d[d.find(' '): len(d)])
 
         results = classifier.predict_proba(verified_list, k=1)
         result_list = []
         for result in results:
-            for r in result: 
+            for r in result:
                 result_list.append(r[0])
 
         wrong = 0
         handled_result_list = []
         for idx in range(0, len(result_list)):
             if lable_list[idx] != result_list[idx]:
-                wrong += 1 
+                wrong += 1
                 tmp_str = '' + lable_list[idx] + ' => ' + result_list[idx] + ' => ' + verified_list[idx]
                 handled_result_list.append(tmp_str)
 
         print('驗證資料數 :', len(results))
         print('錯誤分類數 :', wrong)
-        print('正確率 :', 100-(wrong/len(results)*100), '%')
+        print('正確率 :', 100 - (wrong / len(results) * 100), '%')
         return handled_result_list
 
     else:

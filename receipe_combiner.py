@@ -13,17 +13,19 @@ cate_dict = {}
 for ct in cate_type:
     cate_dict[ct['id']] = ct['name']
 
+
 def merge_type(type_id):
     type_id = int(type_id)
-    if type_id==0 or type_id==1 or type_id==12:
+    if type_id == 0 or type_id == 1 or type_id == 12:
         type_id = 0
-    elif type_id==3:
+    elif type_id == 3:
         type_id = 3
-    elif type_id==16:
+    elif type_id == 16:
         type_id = 16
     else:
         type_id = 2
     return str(type_id)
+
 
 rec_dict = {}
 for rd in rec_type:

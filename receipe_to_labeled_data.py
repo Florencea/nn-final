@@ -7,11 +7,13 @@ receipe = json.load(codecs.open(sys.argv[1], 'r', 'utf-8-sig'))
 train_list = ['name', 'intro', 'ingres', 'steps']
 #train_list = ['name', 'intro', 'ingres', 'spices', 'steps']
 
+
 def is_None(recipe, combination):
     for cb in combination:
         if recipe[cb] == '' or recipe[cb] is None:
             return True
     return False
+
 
 def get_label_str(category):
     label_str = ''
@@ -20,7 +22,8 @@ def get_label_str(category):
         label_str += ct
     return label_str
 
-for iters in range(1, len(train_list)+1):
+
+for iters in range(1, len(train_list) + 1):
     for combination in combinations(train_list, iters):
         train_file = 'training_data/data'
         for cb in combination:

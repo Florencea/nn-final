@@ -1,15 +1,16 @@
 import statistics
-import recipe_classifier_verifier as trainer
 from itertools import combinations
+
+import recipe_classifier_verifier as trainer
 
 test_times = 10
 verify_mode = False
 combination_length = 1
 
 train_list = ['name', 'intro', 'ingres', 'steps']
-#train_list = ['name_intro_ingres']
+# train_list = ['name_intro_ingres']
 training_list = []
-for iters in range(combination_length, len(train_list)+1):
+for iters in range(combination_length, len(train_list) + 1):
     for combination in combinations(train_list, iters):
         train_file = 'data'
         for cb in combination:
@@ -55,7 +56,7 @@ else:
                             result_r.append(result.recall)
                             result_cnt = result.ntrain
                             result_nexample = result.nexamples
-                        tmp = training_source[training_source.find('_')+1: training_source.find('.')]
-                        print('%-23s' % tmp + '%12d' % result_cnt + '%12s' % result_nexample + '%9s' % test_times + '%9s' %  1 + '%8s' %  lr_i + '%5s' % ep_i + '%10s' % wng_i, end='', file=result_csv)
+                        tmp = training_source[training_source.find('_') + 1: training_source.find('.')]
+                        print('%-23s' % tmp + '%12d' % result_cnt + '%12s' % result_nexample + '%9s' % test_times + '%9s' % 1 + '%8s' % lr_i + '%5s' % ep_i + '%10s' % wng_i, end='', file=result_csv)
                         print('{:14.3%}'.format(statistics.mean(result_p)), '{:9.3%}'.format(statistics.stdev(result_p)), '{:10.3%}'.format(statistics.mean(result_r)), '{:9.3%}'.format(statistics.stdev(result_r)), file=result_csv)
             print('', file=result_csv)
